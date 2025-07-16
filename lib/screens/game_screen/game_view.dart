@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:permission_panic/models/permission_card.dart';
+import 'package:permission_panic/screens/game_over/gameover_view.dart';
 import 'package:permission_panic/utils/controllers/game_controller.dart';
 import 'package:permission_panic/widgets/permission_card_widget.dart';
 
@@ -90,7 +91,7 @@ class _GameViewState extends State<GameView> {
     });
 
     await Future.delayed(
-      Duration(milliseconds: 400),
+      Duration(milliseconds: 100),
     ); //a little delay for smooth animation
 
     final hasNext = _gameController.moveToNextCard();
@@ -104,7 +105,11 @@ class _GameViewState extends State<GameView> {
 
   //End game
   void endGame() {
-    // final isWinner = _gameController.didPlayerWin();
+    final isWinner = _gameController.didPlayerWin();
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => GameOver(isWinner: isWinner)),
+      (_) => false,
+    );
   }
 
   @override

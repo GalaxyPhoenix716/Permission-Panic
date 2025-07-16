@@ -29,29 +29,51 @@ class PermissionCardWidget extends StatelessWidget {
                     child: Image(image: AssetImage(permissionCard.appIcon)),
                   ),
                   const SizedBox(width: 15),
-                  Text(permissionCard.appName, style: TextStyle(color: Colors.white),),
+                  Text(
+                    permissionCard.appName,
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
-              Text(permissionCard.permissions, style: TextStyle(color: Colors.white),),
+              Text(
+                permissionCard.permissions,
+                style: TextStyle(color: Colors.white),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // permissionCard.allowOnRight ? 
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "<- DENY",
-                      style: TextStyle(color: Color(0xFF3DDC84)),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "ALLOW ->",
-                      style: TextStyle(color: Color(0xFFFF4C4C)),
-                    ),
-                  ),
-                ],
+                children: permissionCard.allowOnRight
+                    ? [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "<- DENY",
+                            style: TextStyle(color: Color(0xFFFF4C4C)),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "ALLOW ->",
+                            style: TextStyle(color: Color(0xFF3DDC84)),
+                          ),
+                        ),
+                      ]
+                    : [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "<- ALLOW",
+                            style: TextStyle(color: Color(0xFF3DDC84)),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "DENY ->",
+                            style: TextStyle(color: Color(0xFFFF4C4C)),
+                          ),
+                        ),
+                      ],
               ),
             ],
           ),
