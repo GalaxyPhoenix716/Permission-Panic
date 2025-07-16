@@ -1,0 +1,20 @@
+[
+    {
+        "appName": "SketchyVPN",
+        "permissions": "",
+        "isSafe": false,
+        "appIcon": ""
+    },
+    {
+        "appName": "To-Do MAX",
+        "permissions": "",
+        "isSafe": true,
+        "appIcon": ""
+    },
+    {
+        "appName": "Blender Controller",
+        "permissions": "",
+        "isSafe": false,
+        "appIcon": ""
+    }
+]
