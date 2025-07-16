@@ -52,6 +52,13 @@ class GameController {
 
   }
 
+  //Decrease time
+  void decrementTimer() {
+    if (remainingTime > 0) {
+      remainingTime --;
+    }
+  }
+
   //Evaluating if the user swiped to the correct side
   bool evaluateSwipe(bool userSelectecdAllow) {
     final card = currentCard;
@@ -101,6 +108,6 @@ class GameController {
 
   //checking if player won
   bool didPlayerWin() {
-    return correctAnswers >= (cards.length * 0.8).ceil();
+    return correctAnswers >= (cards.length * 0.75).ceil();
   }
 }

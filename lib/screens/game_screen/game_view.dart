@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:permission_panic/models/permission_card.dart';
 import 'package:permission_panic/utils/controllers/game_controller.dart';
@@ -13,15 +15,31 @@ class GameView extends StatefulWidget {
 class _GameViewState extends State<GameView> {
   final GameController _gameController = GameController();
   double swipeOffset = 0;
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
 
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      _gameController.decrementTimer();
+      if (_gameController.remainingTime <= 0) {
+        _timer.cancel();
+        endGame();
+      }
+      setState(() {});
+    });
+
     Future.microtask(() async {
       await _gameController.loadCardsFromJson('lib/data/cards.json');
       setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   //Handles swiping logic
@@ -78,12 +96,15 @@ class _GameViewState extends State<GameView> {
     final hasNext = _gameController.moveToNextCard();
 
     if (!hasNext || _gameController.remainingTime <= 0) {
-      final isWinner = _gameController.didPlayerWin();
-
-      ///Navigation Here///
+      endGame();
     } else {
       setState(() {});
     }
+  }
+
+  //End game
+  void endGame() {
+    // final isWinner = _gameController.didPlayerWin();
   }
 
   @override
@@ -99,30 +120,44 @@ class _GameViewState extends State<GameView> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0D1117),
-      body: Center(
-        child: GestureDetector(
-          onPanUpdate: (details) {
-            setState(() {
-              swipeOffset += details.delta.dx;
-            });
-          },
-          onPanEnd: (details) {
-            handleSwipeEnd();
-          },
-          child: Transform.translate(
-            offset: Offset(swipeOffset, 0),
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 200),
-              transitionBuilder: (child, animation) {
-                return ScaleTransition(scale: animation, child: child);
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Text(
+            '${_gameController.remainingTime}s',
+            style: const TextStyle(
+              fontSize: 24,
+              color: Colors.redAccent,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          Center(
+            child: GestureDetector(
+              onPanUpdate: (details) {
+                setState(() {
+                  swipeOffset += details.delta.dx;
+                });
               },
-              child: PermissionCardWidget(
-                permissionCard: currentCard,
-                key: ValueKey(_gameController.currentCard.id),
+              onPanEnd: (details) {
+                handleSwipeEnd();
+              },
+              child: Transform.translate(
+                offset: Offset(swipeOffset, 0),
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 200),
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
+                  child: PermissionCardWidget(
+                    permissionCard: currentCard,
+                    key: ValueKey(_gameController.currentCard.id),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

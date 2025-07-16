@@ -29,10 +29,10 @@ class PermissionCardWidget extends StatelessWidget {
                     child: Image(image: AssetImage(permissionCard.appIcon)),
                   ),
                   const SizedBox(width: 15),
-                  Text(permissionCard.appName),
+                  Text(permissionCard.appName, style: TextStyle(color: Colors.white),),
                 ],
               ),
-              Text(permissionCard.permissions),
+              Text(permissionCard.permissions, style: TextStyle(color: Colors.white),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
