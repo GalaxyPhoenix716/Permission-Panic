@@ -1,17 +1,20 @@
 [
     {
+        "id": "1",
         "appName": "SketchyVPN",
         "permissions": "",
         "isSafe": false,
         "appIcon": "lib/utils/images/sketchy_vpn.png"
     },
     {
+        "id": "2",
         "appName": "To-Do MAX",
         "permissions": "",
         "isSafe": true,
         "appIcon": "lib/utils/images/sketchy_vpn.png"
     },
     {
+        "id": "3",
         "appName": "Blender Controller",
         "permissions": "",
         "isSafe": false,

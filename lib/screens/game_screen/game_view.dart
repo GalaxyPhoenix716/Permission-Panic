@@ -12,37 +12,78 @@ class GameView extends StatefulWidget {
 
 class _GameViewState extends State<GameView> {
   final GameController _gameController = GameController();
-  double cardX = 0;
+  double swipeOffset = 0;
 
   @override
   void initState() {
     super.initState();
 
-    // You can make init async using Future.microtask:
     Future.microtask(() async {
       await _gameController.loadCardsFromJson('lib/data/cards.json');
+      setState(() {});
     });
   }
 
-  void handleSwipe(bool approved) {
-    // Advance to the next card
-    // bool hasNext = _controller.moveToNextCard();
+  //Handles swiping logic
+  void handleSwipeEnd() {
+    const swipeThreshold = 100;
 
-    // if (!hasNext) {
-    //   // Go to result screen or show dialog
-    //   // Navigator.pushReplacementNamed(context, '/result');
-    // } else {
-    //   setState(() {
-    //     cardX = 0;
-    //     cardY = 0;
-    //   });
-    // }
+    if (swipeOffset.abs() > swipeThreshold) {
+      final swipedRight = swipeOffset > 0;
+      animateSwipeAway(swipedRight);
+    } else {
+      // reset card if swipe was too less
+      setState(() {
+        swipeOffset = 0;
+      });
+    }
   }
 
-  void resetCardPosition() {
+  //Card swipe animation
+  Future<void> animateSwipeAway(bool swipedRight) async {
+    final direction = swipedRight ? 1.0 : -1.0;
+
+    //animate card sliding out off the screen
+    for (int i = 0; i < 10; i++) {
+      setState(() {
+        swipeOffset += 20 * direction;
+      });
+      await Future.delayed(Duration(milliseconds: 10));
+    }
+
+    //evaluate result after each swipe
+    final result = _gameController.evaluateSwipe(swipedRight);
+
+    if (result) {
+      //correct swipe
+      movetoNextCardWithAnimation();
+    } else {
+      //wrong swipe
+      // await triggerPenaltyAnimation();
+      movetoNextCardWithAnimation();
+    }
+  }
+
+  //Popping next card with pop animation
+  Future<void> movetoNextCardWithAnimation() async {
+    //reset swipe
     setState(() {
-      cardX = 0;
+      swipeOffset = 0.0;
     });
+
+    await Future.delayed(
+      Duration(milliseconds: 400),
+    ); //a little delay for smooth animation
+
+    final hasNext = _gameController.moveToNextCard();
+
+    if (!hasNext || _gameController.remainingTime <= 0) {
+      final isWinner = _gameController.didPlayerWin();
+
+      ///Navigation Here///
+    } else {
+      setState(() {});
+    }
   }
 
   @override
@@ -54,7 +95,7 @@ class _GameViewState extends State<GameView> {
       );
     }
 
-    // PermissionCard currentCard = _controller.currentCard;
+    PermissionCard currentCard = _gameController.currentCard;
 
     return Scaffold(
       backgroundColor: const Color(0xFF0D1117),
@@ -62,22 +103,25 @@ class _GameViewState extends State<GameView> {
         child: GestureDetector(
           onPanUpdate: (details) {
             setState(() {
-              cardX += details.delta.dx;
+              swipeOffset += details.delta.dx;
             });
           },
           onPanEnd: (details) {
-            if (cardX > 100) {
-              handleSwipe(true); // Swipe right → approve
-            } else if (cardX < -100) {
-              handleSwipe(false); // Swipe left → deny
-            } else {
-              resetCardPosition();
-            }
+            handleSwipeEnd();
           },
-          // child: Transform.translate(
-          //   offset: Offset(cardX, cardY),
-          //   child: PermissionCardWidget(permissionCard: currentCard),
-          // ),
+          child: Transform.translate(
+            offset: Offset(swipeOffset, 0),
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 200),
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(scale: animation, child: child);
+              },
+              child: PermissionCardWidget(
+                permissionCard: currentCard,
+                key: ValueKey(_gameController.currentCard.id),
+              ),
+            ),
+          ),
         ),
       ),
     );

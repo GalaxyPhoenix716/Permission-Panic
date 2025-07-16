@@ -36,6 +36,7 @@ class PermissionCardWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  // permissionCard.allowOnRight ? 
                   TextButton(
                     onPressed: () {},
                     child: const Text(

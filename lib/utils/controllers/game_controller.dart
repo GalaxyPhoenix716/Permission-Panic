@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer' as devtools show log;
+// import 'dart:developer' as devtools show log;
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:permission_panic/models/permission_card.dart';
