@@ -5,6 +5,8 @@ import 'package:permission_panic/models/permission_card.dart';
 import 'package:permission_panic/screens/game_over/gameover_view.dart';
 import 'package:permission_panic/utils/controllers/game_controller.dart';
 import 'package:permission_panic/widgets/animated_background.dart';
+import 'package:permission_panic/widgets/circuit_board_widget.dart';
+import 'package:permission_panic/widgets/clock_animation.dart';
 import 'package:permission_panic/widgets/glitch_overlay_widget.dart';
 import 'package:permission_panic/widgets/permission_card_widget.dart';
 import 'package:permission_panic/widgets/sussy_offer_widget.dart';
@@ -33,6 +35,8 @@ class _GameViewState extends State<GameView> {
   double _shakeOffsetX = 0;
   double _shakeOffsetY = 0;
   double _shakeRotation = 0;
+
+  //Smoke Animation
 
   @override
   void initState() {
@@ -73,8 +77,8 @@ class _GameViewState extends State<GameView> {
     //check for sussy offer
     if (_gameController.checkIfSussyOfferShouldShow()) {
       showSussyOfferPopup(context, (choice) {
-        if (choice == SussyOfferAction.cancel) {} 
-        else if (choice == SussyOfferAction.install) {
+        if (choice == SussyOfferAction.cancel) {
+        } else if (choice == SussyOfferAction.install) {
           handleSussyInstall(context);
         }
       });
@@ -283,34 +287,42 @@ class _GameViewState extends State<GameView> {
     PermissionCard currentCard = _gameController.currentCard;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0D1117),
       appBar: AppBar(),
+      backgroundColor: const Color(0xFF0D1117),
       body: Stack(
         children: [
-          AnimatedBackground(isGlitched: isGlitching,),
+          AnimatedBackground(isGlitched: isGlitching),
+          GameViewWithCircuitBoard(key: circuitBoardKey),
           AbsorbPointer(
             //used to handle screen freeze feature
             absorbing: freezeUI,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              color: Colors.transparent,//isGlitching ? glitchBgColor : const Color(0xFF0D1117),
               child: Transform.translate(
                 //used to handle screen shake feature
-                offset: Offset(
-                  _shakeOffsetX,
-                  _shakeOffsetY,
-                ),
-                child: Transform.rotate(        //screen rotate along with shake
+                offset: Offset(_shakeOffsetX, _shakeOffsetY),
+                child: Transform.rotate(
+                  //screen rotate along with shake
                   angle: _shakeRotation,
                   child: Column(
                     children: [
-                      Text(
-                        '${_gameController.remainingTime}s',
-                        style: const TextStyle(
-                          fontSize: 24,
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ClockWithHand(
+                            remainingTime: _gameController.remainingTime,
+                            totalTime: _gameController.totalTime,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${_gameController.remainingTime}',
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                       Center(
                         child: GestureDetector(
@@ -324,7 +336,8 @@ class _GameViewState extends State<GameView> {
                             if (freezeUI) return;
                             handleSwipeEnd();
                           },
-                          child: Transform.translate(       //used for swipe feature
+                          child: Transform.translate(
+                            //used for swipe feature
                             offset: Offset(swipeOffset, 0),
                             child: AnimatedSwitcher(
                               duration: const Duration(milliseconds: 200),

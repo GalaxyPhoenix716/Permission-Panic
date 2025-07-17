@@ -3,6 +3,7 @@ import 'dart:developer' as devtools show log;
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:permission_panic/models/permission_card.dart';
+import 'package:permission_panic/widgets/circuit_board_widget.dart';
 
 class GameController {
   //Game Cards
@@ -10,8 +11,8 @@ class GameController {
   int currentCardIndex = 0;
 
   //Timer
-  int totalTime = 30;
-  int remainingTime = 30;
+  int totalTime = 45;
+  int remainingTime = 45;
 
   //Score
   int correctAnswers = 0;
@@ -56,7 +57,8 @@ class GameController {
     currentCardIndex = 0;
     correctAnswers = 0;
     remainingTime = totalTime;
-    enableSussyOffer = true;//Random().nextInt(5) == 0; //20% chance of this popping up
+    enableSussyOffer =
+        true; //Random().nextInt(5) == 0; //20% chance of this popping up
     sussyOfferShown = false;
     initializeSussyOffer();
   }
@@ -64,15 +66,18 @@ class GameController {
   //Evaluating if the user swiped to the correct side
   bool evaluateSwipe(bool userSwipedRight) {
     final card = currentCard;
-    bool userSelectecdAllow = userSwipedRight && card.allowOnRight;
+    bool userSelectedAllow =
+        (userSwipedRight && card.allowOnRight) ||
+        (!userSwipedRight && !card.allowOnRight);
 
     devtools.log(
-      "App Name: ${card.appName}\nUser swiped: ${userSwipedRight ? "Right" : "Left"}\nAllow is on: ${card.allowOnRight ? "Right" : "Left"}\nIs card safe: ${card.isSafe}\nDid user selected right choice?? ${(userSelectecdAllow && card.isSafe) || (!userSelectecdAllow && !card.isSafe)}",
+      "App Name: ${card.appName}\nUser swiped: ${userSwipedRight ? "Right" : "Left"}\nAllow is on: ${card.allowOnRight ? "Right" : "Left"}\nIs card safe: ${card.isSafe}\nDid user selected right choice?? ${(userSelectedAllow && card.isSafe) || (!userSelectedAllow && !card.isSafe)}",
     );
 
-    if ((userSelectecdAllow && card.isSafe) ||
-        (!userSelectecdAllow && !card.isSafe)) {
+    if ((userSelectedAllow && card.isSafe) ||
+        (!userSelectedAllow && !card.isSafe)) {
       correctAnswers++;
+      circuitBoardKey.currentState?.reduceSmoke();
       return true;
     } else {
       applyPenalty();
@@ -104,7 +109,7 @@ class GameController {
   //Setting random trigger time between 5-10 seconds for sussy offer
   void initializeSussyOffer() {
     if (enableSussyOffer) {
-      sussyOfferTriggerTime = 5 + Random().nextInt(6); // 5 to 10 inclusive
+      sussyOfferTriggerTime = 10 + Random().nextInt(6); // 10 to 5 inclusive
     }
   }
 
