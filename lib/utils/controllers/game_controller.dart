@@ -56,8 +56,7 @@ class GameController {
     currentCardIndex = 0;
     correctAnswers = 0;
     remainingTime = totalTime;
-    enableSussyOffer =
-        true; //Random().nextInt(5) == 0;    //20% chance of this popping up
+    enableSussyOffer = Random().nextInt(5) == 0;    //20% chance of this popping up
     sussyOfferShown = false;
     initializeSussyOffer();
   }

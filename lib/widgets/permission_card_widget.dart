@@ -12,7 +12,9 @@ class PermissionCardWidget extends StatelessWidget {
       width: PPHelpers.getScreenWidth(context) > 400
           ? 500
           : PPHelpers.getScreenWidth(context) * 0.8,
-      height: 600,
+      height: PPHelpers.getScreenHeight(context) > 400
+          ? 500
+          : PPHelpers.getScreenHeight(context) * 0.5,
       child: Card(
         color: Color(0xFF161B22),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:permission_panic/models/permission_card.dart';
 import 'package:permission_panic/screens/game_over/gameover_view.dart';
@@ -72,11 +71,9 @@ class _GameViewState extends State<GameView> {
 
     //check for sussy offer
     if (_gameController.checkIfSussyOfferShouldShow()) {
-      _pauseGameTimer();
       showSussyOfferPopup(context, (choice) {
-        if (choice == SussyOfferAction.cancel) {
-          _resumeGameTimer();
-        } else if (choice == SussyOfferAction.install) {
+        if (choice == SussyOfferAction.cancel) {} 
+        else if (choice == SussyOfferAction.install) {
           handleSussyInstall(context);
         }
       });
@@ -164,8 +161,6 @@ class _GameViewState extends State<GameView> {
     setState(() {
       _gameController.remainingTime += 10; //added the 10 seconds for the bait
     });
-
-    _resumeGameTimer(); //resumed the timer
 
     await Future.delayed(
       Duration(seconds: 3),
@@ -292,17 +287,19 @@ class _GameViewState extends State<GameView> {
       body: Stack(
         children: [
           AbsorbPointer(
+            //used to handle screen freeze feature
             absorbing: freezeUI,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               color: isGlitching ? glitchBgColor : const Color(0xFF0D1117),
               child: Transform.translate(
+                //used to handle screen shake feature
                 offset: Offset(
                   _shakeOffsetX,
                   _shakeOffsetY,
-                ), // Add Y-axis shake
-                child: Transform.rotate(
-                  angle: _shakeRotation, // Add rotation
+                ),
+                child: Transform.rotate(        //screen rotate along with shake
+                  angle: _shakeRotation,
                   child: Column(
                     children: [
                       Text(
@@ -325,7 +322,7 @@ class _GameViewState extends State<GameView> {
                             if (freezeUI) return;
                             handleSwipeEnd();
                           },
-                          child: Transform.translate(
+                          child: Transform.translate(       //used for swipe feature
                             offset: Offset(swipeOffset, 0),
                             child: AnimatedSwitcher(
                               duration: const Duration(milliseconds: 200),

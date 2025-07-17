@@ -1,23 +1,345 @@
 [
-    {
-        "id": "1",
-        "appName": "SketchyVPN",
-        "permissions": "Alow this app to access your location and network",
-        "isSafe": false,
-        "appIcon": "lib/utils/images/sketchy_vpn.png"
-    },
-    {
-        "id": "2",
-        "appName": "To-Do MAX",
-        "permissions": "Allow this app to access your microphone",
-        "isSafe": true,
-        "appIcon": "lib/utils/images/sketchy_vpn.png"
-    },
-    {
-        "id": "3",
-        "appName": "Blender Controller",
-        "permissions": "Allow this app to access your notifications, camera andf blender",
-        "isSafe": false,
-        "appIcon": "lib/utils/images/sketchy_vpn.png"
-    }
+  {
+    "id": 1,
+    "appName": "CampusNav",
+    "permissions": "Access GPS for campus maps",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 2,
+    "appName": "UniMail",
+    "permissions": "Send you university notifications",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 3,
+    "appName": "AlarmMe",
+    "permissions": "Run in the background to sound alarms",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 4,
+    "appName": "WeatherNow",
+    "permissions": "Access location for local forecasts",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 5,
+    "appName": "NoteBuddy",
+    "permissions": "Access mic for voice memos",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 6,
+    "appName": "Maps+",
+    "permissions": "Access your location while using the app",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 7,
+    "appName": "Maps+ Pro",
+    "permissions": "Always track your location, even when app is closed",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 8,
+    "appName": "PhotoCloud",
+    "permissions": "Access your gallery to upload photos",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 9,
+    "appName": "PhotoCloud Share",
+    "permissions": "Auto-upload your photos and make them public",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 10,
+    "appName": "VoiceMemo",
+    "permissions": "Use your microphone to record voice notes",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 11,
+    "appName": "VoiceMemo AI",
+    "permissions": "Use your mic 24/7 to catch spontaneous ideas",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 12,
+    "appName": "TaskManager Pro",
+    "permissions": "Run in background to send you reminders",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 13,
+    "appName": "TaskManager Spy",
+    "permissions": "Run in background and access your browsing history",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 14,
+    "appName": "ClassNotifier",
+    "permissions": "Send push notifications about class changes",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 15,
+    "appName": "ClassNotifier+",
+    "permissions": "Send push notifications and access your contacts",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 16,
+    "appName": "CalendarSync",
+    "permissions": "Access your calendar events",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 17,
+    "appName": "CalendarLeech",
+    "permissions": "Access your calendar and share events with advertisers",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 18,
+    "appName": "Fileshare Buddy",
+    "permissions": "Access your local storage to share files",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 19,
+    "appName": "Fileshare Global",
+    "permissions": "Access all your files and sync to global servers",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 20,
+    "appName": "CampusWiFi Connect",
+    "permissions": "View nearby WiFi networks and auto-connect",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 21,
+    "appName": "CampusWiFi Logger",
+    "permissions": "Log all websites you visit on campus WiFi",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 22,
+    "appName": "CryptoPup",
+    "permissions": "Mine crypto while you sleep",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 23,
+    "appName": "DramaDrone",
+    "permissions": "Livestream your roommate drama",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 24,
+    "appName": "StudySync",
+    "permissions": "Backup your notes to the cloud",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 25,
+    "appName": "FocusZen",
+    "permissions": "Block notifications & monitor screen time",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 26,
+    "appName": "PetWhisperer AI",
+    "permissions": "Translate your dog's barks & send push notifications",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 27,
+    "appName": "SmartFridgePal",
+    "permissions": "Access your fridge contents & auto-order snacks",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 28,
+    "appName": "MoodSwing",
+    "permissions": "Use your mic to analyze your emotions",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 29,
+    "appName": "SleepCall",
+    "permissions": "Make phone calls while you sleep",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 30,
+    "appName": "NostalgiaGram",
+    "permissions": "Access your old photos & share \"best-of\" moments",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 31,
+    "appName": "MirrorMirror 24/7",
+    "permissions": "Access your front camera 24/7",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 32,
+    "appName": "LaundryMaster",
+    "permissions": "Control your dorm washing machine remotely",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 33,
+    "appName": "SnackSync",
+    "permissions": "Auto-order pizza for late-night study sessions",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 34,
+    "appName": "SleepyShopper",
+    "permissions": "Buy stuff for you while you nap",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 35,
+    "appName": "BrainCloud Backup",
+    "permissions": "Sync your thoughts to the cloud",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 36,
+    "appName": "MoodLeech",
+    "permissions": "Drain your bad vibes & sell them to researchers",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 37,
+    "appName": "SecretKeeper",
+    "permissions": "Upload your secrets to a secure dark web vault",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 38,
+    "appName": "TaxEvader Helper",
+    "permissions": "Hide suspicious transactions",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 39,
+    "appName": "Overlord App",
+    "permissions": "Override all app permissions",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 40,
+    "appName": "DramaDrone Ultra",
+    "permissions": "Live stream your entire day 24/7",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 41,
+    "appName": "MindMeld Messenger",
+    "permissions": "Read your private thoughts for better suggestions",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 42,
+    "appName": "Yawnalyzer",
+    "permissions": "Share your yawns with your entire contact list",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 43,
+    "appName": "RefridgeRaid",
+    "permissions": "Scan your fridge & live stream your midnight snacking",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 44,
+    "appName": "EchoEcho",
+    "permissions": "Repeat everything you say to everyone",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 45,
+    "appName": "ToiletTunes",
+    "permissions": "Play music through bathroom speakers & record sound",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 46,
+    "appName": "GossipGnome",
+    "permissions": "Record all conversations within 20 feet",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 47,
+    "appName": "SleepSpy",
+    "permissions": "Record your snoring & share with coworkers",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 48,
+    "appName": "HugBot",
+    "permissions": "Detect loneliness & send unsolicited hugs",
+    "isSafe": true,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  },
+  {
+    "id": 49,
+    "appName": "FocusZen Pro",
+    "permissions": "Hypnotize you to stay productive",
+    "isSafe": false,
+    "appIcon": "lib/utils/images/sketchy_vpn.png"
+  }
 ]
