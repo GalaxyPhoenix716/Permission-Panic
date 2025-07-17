@@ -1,5 +1,5 @@
 import 'dart:convert';
-// import 'dart:developer' as devtools show log;
+import 'dart:developer' as devtools show log;
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:permission_panic/models/permission_card.dart';
@@ -56,14 +56,19 @@ class GameController {
     currentCardIndex = 0;
     correctAnswers = 0;
     remainingTime = totalTime;
-    enableSussyOffer = Random().nextInt(5) == 0;    //20% chance of this popping up
+    enableSussyOffer = true;//Random().nextInt(5) == 0; //20% chance of this popping up
     sussyOfferShown = false;
     initializeSussyOffer();
   }
 
   //Evaluating if the user swiped to the correct side
-  bool evaluateSwipe(bool userSelectecdAllow) {
+  bool evaluateSwipe(bool userSwipedRight) {
     final card = currentCard;
+    bool userSelectecdAllow = userSwipedRight && card.allowOnRight;
+
+    devtools.log(
+      "App Name: ${card.appName}\nUser swiped: ${userSwipedRight ? "Right" : "Left"}\nAllow is on: ${card.allowOnRight ? "Right" : "Left"}\nIs card safe: ${card.isSafe}\nDid user selected right choice?? ${(userSelectecdAllow && card.isSafe) || (!userSelectecdAllow && !card.isSafe)}",
+    );
 
     if ((userSelectecdAllow && card.isSafe) ||
         (!userSelectecdAllow && !card.isSafe)) {
@@ -102,7 +107,7 @@ class GameController {
       sussyOfferTriggerTime = 5 + Random().nextInt(6); // 5 to 10 inclusive
     }
   }
-  
+
   //Popping sussy download offer
   bool checkIfSussyOfferShouldShow() {
     if (!enableSussyOffer || sussyOfferShown) {

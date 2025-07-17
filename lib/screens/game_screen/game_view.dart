@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_panic/models/permission_card.dart';
 import 'package:permission_panic/screens/game_over/gameover_view.dart';
 import 'package:permission_panic/utils/controllers/game_controller.dart';
+import 'package:permission_panic/widgets/animated_background.dart';
 import 'package:permission_panic/widgets/glitch_overlay_widget.dart';
 import 'package:permission_panic/widgets/permission_card_widget.dart';
 import 'package:permission_panic/widgets/sussy_offer_widget.dart';
@@ -286,12 +287,13 @@ class _GameViewState extends State<GameView> {
       appBar: AppBar(),
       body: Stack(
         children: [
+          AnimatedBackground(isGlitched: isGlitching,),
           AbsorbPointer(
             //used to handle screen freeze feature
             absorbing: freezeUI,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              color: isGlitching ? glitchBgColor : const Color(0xFF0D1117),
+              color: Colors.transparent,//isGlitching ? glitchBgColor : const Color(0xFF0D1117),
               child: Transform.translate(
                 //used to handle screen shake feature
                 offset: Offset(
