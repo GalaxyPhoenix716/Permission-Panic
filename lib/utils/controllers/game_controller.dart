@@ -19,51 +19,55 @@ class GameController {
   //Suspicious Download Offer
   bool enableSussyOffer = false;
   bool sussyOfferShown = false;
+  int? sussyOfferTriggerTime;
 
   //Getter for the cards
   PermissionCard get currentCard => cards[currentCardIndex];
 
   //Load cards from cards.json
   Future<void> loadCardsFromJson(String path) async {
-    final String cardJsonString = await rootBundle.loadString(path);    //extracts json in string form
-    final List<dynamic> cardJsonData = jsonDecode(cardJsonString);      //decode json in string form to list
+    final String cardJsonString = await rootBundle.loadString(
+      path,
+    ); //extracts json in string form
+    final List<dynamic> cardJsonData = jsonDecode(
+      cardJsonString,
+    ); //decode json in string form to list
     final List<PermissionCard> allCards = cardJsonData.map((item) {
       return PermissionCard.fromJson(item);
-    }).toList();      //Convert json list of items to permission card objects
+    }).toList(); //Convert json list of items to permission card objects
 
     ///We loaded our permission cards. Now we have to shuffle and select any random 12 of those///
-    
+
     allCards.shuffle();
-    final selectedCards = allCards.take(12).toList();   //shuffled and took 12 cards at random
+    final selectedCards = allCards
+        .take(12)
+        .toList(); //shuffled and took 12 cards at random
 
     ///Now we have to assign which side is allow swiped on///
-    
+
     final random = Random();
-    cards = selectedCards.map((card) {
-      return card.copyWith(allowOnRight: random.nextBool());
-    }).toList();    //randomly assign side where the user should swpie to allow the permission
+    cards = selectedCards.map(
+      (card) {
+        return card.copyWith(allowOnRight: random.nextBool());
+      },
+    ).toList(); //randomly assign side where the user should swpie to allow the permission
 
     //Reset game values
     currentCardIndex = 0;
     correctAnswers = 0;
     remainingTime = totalTime;
-    enableSussyOffer = Random().nextInt(5) == 0;    //20% chance of this popping up
+    enableSussyOffer =
+        true; //Random().nextInt(5) == 0;    //20% chance of this popping up
     sussyOfferShown = false;
-
-  }
-
-  //Decrease time
-  void decrementTimer() {
-    if (remainingTime > 0) {
-      remainingTime --;
-    }
+    initializeSussyOffer();
   }
 
   //Evaluating if the user swiped to the correct side
   bool evaluateSwipe(bool userSelectecdAllow) {
     final card = currentCard;
 
-    if((userSelectecdAllow && card.isSafe) || (!userSelectecdAllow && !card.isSafe)) {
+    if ((userSelectecdAllow && card.isSafe) ||
+        (!userSelectecdAllow && !card.isSafe)) {
       correctAnswers++;
       return true;
     } else {
@@ -84,7 +88,8 @@ class GameController {
 
   //Moving to next card after swiping
   bool moveToNextCard() {
-    if(currentCardIndex + 1 >= cards.length) {      //checking if cards are over or not
+    if (currentCardIndex + 1 >= cards.length) {
+      //checking if cards are over or not
       return false;
     } else {
       currentCardIndex++;
@@ -92,14 +97,21 @@ class GameController {
     }
   }
 
+  //Setting random trigger time between 5-10 seconds for sussy offer
+  void initializeSussyOffer() {
+    if (enableSussyOffer) {
+      sussyOfferTriggerTime = 5 + Random().nextInt(6); // 5 to 10 inclusive
+    }
+  }
+  
   //Popping sussy download offer
   bool checkIfSussyOfferShouldShow() {
     if (!enableSussyOffer || sussyOfferShown) {
       return false;
-    } 
+    }
 
-    if (remainingTime < 10) {
-      sussyOfferShown = true;     //this wil prevent it to occur again
+    if (remainingTime == sussyOfferTriggerTime) {
+      sussyOfferShown = true;
       return true;
     }
 
