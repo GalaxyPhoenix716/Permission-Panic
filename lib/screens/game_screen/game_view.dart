@@ -295,7 +295,7 @@ class _GameViewState extends State<GameView> {
       body: Stack(
         children: [
           AnimatedBackground(isGlitched: isGlitching),
-          GameViewWithCircuitBoard(key: circuitBoardKey),
+          CircuitBoard(key: circuitBoardKey, isCorrectMore:  _gameController.correctAnswers >= 4,),
           AbsorbPointer(
             //used to handle screen freeze feature
             absorbing: freezeUI,

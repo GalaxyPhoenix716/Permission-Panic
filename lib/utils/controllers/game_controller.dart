@@ -11,8 +11,8 @@ class GameController {
   int currentCardIndex = 0;
 
   //Timer
-  int totalTime = 45;
-  int remainingTime = 45;
+  int totalTime = 30;
+  int remainingTime = 30;
 
   //Score
   int correctAnswers = 0;

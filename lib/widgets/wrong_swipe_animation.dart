@@ -53,12 +53,18 @@ class _WrongSwipeOverlayState extends State<WrongSwipeOverlay>
 
     _textSlideRight =
         Tween<Offset>(begin: const Offset(1.0, 0), end: Offset.zero).animate(
-          CurvedAnimation(parent: _textSlideController, curve: Curves.easeInOut),
+          CurvedAnimation(
+            parent: _textSlideController,
+            curve: Curves.easeInOut,
+          ),
         );
 
     _textSlideLeft =
         Tween<Offset>(begin: const Offset(-1.0, 0), end: Offset.zero).animate(
-          CurvedAnimation(parent: _textSlideController, curve: Curves.easeInOut),
+          CurvedAnimation(
+            parent: _textSlideController,
+            curve: Curves.easeInOut,
+          ),
         );
   }
 
@@ -86,6 +92,33 @@ class _WrongSwipeOverlayState extends State<WrongSwipeOverlay>
               child: Container(color: Colors.black.withValues(alpha: 0.5)),
             ),
 
+            // Background shaking "WRONG"
+            AnimatedBuilder(
+              animation: _shakeController,
+              builder: (_, child) {
+                double offsetX = 3 * (_shakeController.value - 0.5);
+                return Transform.translate(
+                  offset: Offset((offsetX * 10) + 5, 0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Transform.rotate(
+                      angle: -0.2,
+                      child: FittedBox(
+                        child: Text(
+                          "WRONG!!",
+                          style: TextStyle(
+                            fontSize: 400,
+                            color: const Color.fromARGB(255, 254, 17, 0),
+                            letterSpacing: 10,
+                            fontFamily: 'Spirit Fox',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
             // Content
             Center(
               child: Column(
@@ -98,7 +131,7 @@ class _WrongSwipeOverlayState extends State<WrongSwipeOverlay>
                       scale: 1.3,
                       child: Lottie.asset(
                         'lib/utils/animations/wrongswipe_dangersign.json',
-                        width: PPHelpers.getScreenWidth(context)*0.7,
+                        width: PPHelpers.getScreenWidth(context) * 0.7,
                       ),
                     ),
                   ),
@@ -114,7 +147,7 @@ class _WrongSwipeOverlayState extends State<WrongSwipeOverlay>
                         style: TextStyle(
                           color: const Color.fromARGB(255, 255, 17, 0),
                           fontSize: 50,
-                          fontFamily: 'Spirit Fox'
+                          fontFamily: 'Spirit Fox',
                         ),
                       ),
                     ),
@@ -140,41 +173,13 @@ class _WrongSwipeOverlayState extends State<WrongSwipeOverlay>
                         style: TextStyle(
                           color: const Color.fromARGB(255, 255, 17, 0),
                           fontSize: 50,
-                          fontFamily: 'Spirit Fox'
+                          fontFamily: 'Spirit Fox',
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-
-            // Background shaking "WRONG"
-            AnimatedBuilder(
-              animation: _shakeController,
-              builder: (_, child) {
-                double offsetX = 3 * (_shakeController.value - 0.5);
-                return Transform.translate(
-                  offset: Offset((offsetX * 10)+5, 0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Transform.rotate(
-                      angle: -0.2,
-                      child: FittedBox(
-                        child: Text(
-                          "WRONG!!",
-                          style: TextStyle(
-                            fontSize: 400,
-                            color: const Color.fromARGB(255, 160, 11, 0),
-                            letterSpacing: 10,
-                            fontFamily: 'Spirit Fox'
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
             ),
           ],
         ),

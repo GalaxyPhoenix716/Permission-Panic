@@ -12,7 +12,7 @@ class AnimatedBackground extends StatelessWidget {
         isGlitched
             ? 'lib/utils/animations/glitched_game_bg_animation.json'
             : 'lib/utils/animations/game_bg_animation.json',
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
         repeat: true,
       ),
     );

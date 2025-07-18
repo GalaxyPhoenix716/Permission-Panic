@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 // ignore: library_private_types_in_public_api
-final GlobalKey<_GameViewWithCircuitBoardState> circuitBoardKey = GlobalKey<_GameViewWithCircuitBoardState>();
+final GlobalKey<_CircuitBoardState> circuitBoardKey = GlobalKey<_CircuitBoardState>();
 
-class GameViewWithCircuitBoard extends StatefulWidget {
-  const GameViewWithCircuitBoard({super.key});
+class CircuitBoard extends StatefulWidget {
+  final bool isCorrectMore;
+  const CircuitBoard({super.key, required this.isCorrectMore});
 
   @override
-  State<GameViewWithCircuitBoard> createState() =>
-      _GameViewWithCircuitBoardState();
+  State<CircuitBoard> createState() =>
+      _CircuitBoardState();
 }
 
-class _GameViewWithCircuitBoardState extends State<GameViewWithCircuitBoard> {
-  final GlobalKey<_GameViewWithCircuitBoardState> circuitBoardKey = GlobalKey();
+class _CircuitBoardState extends State<CircuitBoard> {
+  final GlobalKey<_CircuitBoardState> circuitBoardKey = GlobalKey();
   double smokeOpacity = 1.0;
 
   void reduceSmoke() {
     setState(() {
-      smokeOpacity = (smokeOpacity - 0.1).clamp(0.0, 1.0);
+      smokeOpacity = (smokeOpacity - 0.2).clamp(0.0, 1.0);
     });
   }
 
@@ -52,14 +53,18 @@ class _GameViewWithCircuitBoardState extends State<GameViewWithCircuitBoard> {
                 child: SizedBox(
                   width: 200,
                   height: 200,
-                  child: Opacity(
+                  child: widget.isCorrectMore ? Opacity(
                     opacity: smokeOpacity,
                     child: Lottie.asset(
                       'lib/utils/animations/smoke_animation.json',
                       fit: BoxFit.contain,
                       repeat: true,
                     ),
-                  ),
+                  ) : Lottie.asset(
+                      'lib/utils/animations/ram_on_fire.json',
+                      fit: BoxFit.contain,
+                      repeat: true,
+                    ),
                 ),
               ),
             ],

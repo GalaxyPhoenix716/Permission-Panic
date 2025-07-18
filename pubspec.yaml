@@ -35,6 +35,12 @@ flutter:
     - family: Spirit Fox
       fonts:
         - asset: lib/utils/fonts/Spirit fox.otf
+    - family: Mouzambik 
+      fonts:
+        - asset: lib/utils/fonts/mouzambik-demo.regular.ttf
+    - family: Luckiest Guy
+      fonts:
+        - asset: lib/utils/fonts/LuckiestGuy.ttf
 
   #   - family: Trajan Pro
   #     fonts:
