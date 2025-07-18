@@ -14,32 +14,35 @@ class PermissionCardWidget extends StatelessWidget {
           : PPHelpers.getScreenWidth(context) * 0.8,
       height: PPHelpers.getScreenHeight(context) > 400
           ? 500
-          : PPHelpers.getScreenHeight(context) * 0.5,
+          : PPHelpers.getScreenHeight(context) * 0.33,
       child: Card(
         color: Color(0xFF161B22),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Image(image: AssetImage(permissionCard.appIcon)),
-                  ),
-                  const SizedBox(width: 15),
-                  Text(
-                    permissionCard.appName,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+              FittedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      child: Image(image: AssetImage(permissionCard.appIcon),),
+                    ),
+                    const SizedBox(width: 15),
+                    Text(
+                      permissionCard.appName,
+                      style: TextStyle(color: Colors.white, fontSize: 35),
+                    ),
+                  ],
+                ),
               ),
               Text(
-                permissionCard.permissions,
-                style: TextStyle(color: Colors.white),
+                "This app wants access to: ${permissionCard.permissions}",
+                style: TextStyle(color: const Color.fromARGB(255, 154, 154, 154), fontSize: 25),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
