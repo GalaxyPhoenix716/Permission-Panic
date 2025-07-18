@@ -46,6 +46,9 @@ class MainMenuView extends StatelessWidget {
                 Center(
                   child: CartoonButton(
                     label: "START",
+                    size: 35,
+                    spacing: 5,
+                    isboxShadow: true,
                     onPressed: () {
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (_) => GameView()),

@@ -19,7 +19,7 @@ class _CircuitBoardState extends State<CircuitBoard> {
 
   void reduceSmoke() {
     setState(() {
-      smokeOpacity = (smokeOpacity - 0.2).clamp(0.0, 1.0);
+      smokeOpacity = (smokeOpacity - 0.15).clamp(0.0, 1.0);
     });
   }
 

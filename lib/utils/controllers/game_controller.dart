@@ -16,6 +16,7 @@ class GameController {
 
   //Score
   int correctAnswers = 0;
+  int wrongAnswers = 0 ;
 
   //Suspicious Download Offer
   bool enableSussyOffer = false;
@@ -55,6 +56,7 @@ class GameController {
 
     //Reset game values
     currentCardIndex = 0;
+    wrongAnswers = 0;
     correctAnswers = 0;
     remainingTime = totalTime;
     enableSussyOffer =
@@ -80,6 +82,7 @@ class GameController {
       circuitBoardKey.currentState?.reduceSmoke();
       return true;
     } else {
+      wrongAnswers++;
       applyPenalty();
       return false;
     }

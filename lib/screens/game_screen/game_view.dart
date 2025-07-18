@@ -213,7 +213,7 @@ class _GameViewState extends State<GameView> {
               Navigator.of(context).pop();
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                  builder: (builder) => GameOver(isWinner: false),
+                  builder: (builder) => GameOver(isWinner: false, rightSwipes: _gameController.correctAnswers, wrongSwipes: _gameController.wrongAnswers,),
                 ),
                 (_) => false,
               );
@@ -273,7 +273,13 @@ class _GameViewState extends State<GameView> {
   void endGame() {
     final isWinner = _gameController.didPlayerWin();
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => GameOver(isWinner: isWinner)),
+      MaterialPageRoute(
+        builder: (_) => GameOver(
+          isWinner: isWinner,
+          rightSwipes: _gameController.correctAnswers,
+          wrongSwipes: _gameController.wrongAnswers,
+        ),
+      ),
       (_) => false,
     );
   }
@@ -290,12 +296,15 @@ class _GameViewState extends State<GameView> {
     PermissionCard currentCard = _gameController.currentCard;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: Colors.amber),
       backgroundColor: const Color(0xFF0D1117),
       body: Stack(
         children: [
           AnimatedBackground(isGlitched: isGlitching),
-          CircuitBoard(key: circuitBoardKey, isCorrectMore:  _gameController.correctAnswers >= 4,),
+          CircuitBoard(
+            key: circuitBoardKey,
+            isCorrectMore: _gameController.correctAnswers >= 4,
+          ),
           AbsorbPointer(
             //used to handle screen freeze feature
             absorbing: freezeUI,

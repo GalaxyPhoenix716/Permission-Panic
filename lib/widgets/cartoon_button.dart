@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 
 class CartoonButton extends StatefulWidget {
   final String label;
+  final double size;
+  final double spacing;
+  final bool isboxShadow;
   final VoidCallback onPressed;
 
   const CartoonButton({
     super.key,
     required this.label,
-    required this.onPressed,
+    required this.onPressed, required this.size, required this.spacing, required this.isboxShadow,
   });
 
   @override
@@ -46,22 +49,22 @@ class _CartoonButtonState extends State<CartoonButton>
             gradient: LinearGradient(colors: [Colors.deepOrange, Colors.orange,]),
             border: Border.all(color: Colors.black, width: 4),
             borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
-              BoxShadow(
+            boxShadow: [
+              widget.isboxShadow ? BoxShadow(
                 color: Colors.black,
                 offset: Offset(4, 4),
                 blurRadius: 0,
-              )
+              ) : BoxShadow(),
             ],
           ),
           child: Text(
             widget.label,
-            style: const TextStyle(
-              fontSize: 35,
+            style: TextStyle(
+              fontSize: widget.size,
               fontWeight: FontWeight.bold,
               color: Colors.black,
               fontFamily: "Mouzambik",
-              letterSpacing: 5
+              letterSpacing: widget.spacing
             ),
           ),
         ),
