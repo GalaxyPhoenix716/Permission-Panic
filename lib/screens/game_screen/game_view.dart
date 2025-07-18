@@ -10,6 +10,7 @@ import 'package:permission_panic/widgets/clock_animation.dart';
 import 'package:permission_panic/widgets/glitch_overlay_widget.dart';
 import 'package:permission_panic/widgets/permission_card_widget.dart';
 import 'package:permission_panic/widgets/sussy_offer_widget.dart';
+import 'package:permission_panic/widgets/wrong_swipe_animation.dart';
 
 class GameView extends StatefulWidget {
   const GameView({super.key});
@@ -136,7 +137,9 @@ class _GameViewState extends State<GameView> {
       movetoNextCardWithAnimation();
     } else {
       //wrong swipe
-      // await triggerPenaltyAnimation();
+      _pauseGameTimer();
+      await wrongSwipeKey.currentState?.showOverlay();
+      _resumeGameTimer();
       movetoNextCardWithAnimation();
     }
   }
@@ -361,6 +364,8 @@ class _GameViewState extends State<GameView> {
               ),
             ),
           ),
+
+          WrongSwipeOverlay(key: wrongSwipeKey),
 
           if (isGlitching) const GlitchOverlay(),
         ],
